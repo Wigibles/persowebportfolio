@@ -1,9 +1,37 @@
 // Mobile Navigation Toggle
 const hamburger = document.querySelector('.hamburger');
+const navContainer = document.querySelector('.nav-container');
 const navLinks = document.querySelector('.nav-links');
+const overlay = document.querySelector('.mobile-menu-overlay');
+const body = document.body;
 
-hamburger.addEventListener('click', () => {
-    navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+function toggleMenu() {
+    hamburger.classList.toggle('active');
+    navContainer.classList.toggle('active');
+    overlay.classList.toggle('active');
+    body.style.overflow = body.style.overflow === 'hidden' ? '' : 'hidden';
+}
+
+hamburger.addEventListener('click', toggleMenu);
+overlay.addEventListener('click', toggleMenu);
+
+// Close menu when clicking a link
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+            toggleMenu();
+        }
+    });
+});
+
+// Close menu on window resize
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+        hamburger.classList.remove('active');
+        navContainer.classList.remove('active');
+        overlay.classList.remove('active');
+        body.style.overflow = '';
+    }
 });
 
 // Smooth scrolling for navigation links
@@ -18,7 +46,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             });
             // Close mobile menu if open
             if (window.innerWidth <= 768) {
-                navLinks.style.display = 'none';
+                toggleMenu();
             }
         }
     });
@@ -26,25 +54,27 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Form submission handling
 const contactForm = document.querySelector('.contact-form');
-contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Get form data
-    const formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        message: document.getElementById('message').value
-    };
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            message: document.getElementById('message').value
+        };
 
-    // Here you would typically send the form data to a server
-    console.log('Form submitted:', formData);
-    
-    // Show success message
-    alert('Thank you for your message! I will get back to you soon.');
-    
-    // Reset form
-    contactForm.reset();
-});
+        // Here you would typically send the form data to a server
+        console.log('Form submitted:', formData);
+        
+        // Show success message
+        alert('Thank you for your message! I will get back to you soon.');
+        
+        // Reset form
+        contactForm.reset();
+    });
+}
 
 // Navbar scroll effect
 const navbar = document.querySelector('.navbar');
@@ -131,4 +161,49 @@ const chatbotuiToggle = document.getElementById('chatbotui-toggle');
 const chatbotuiIframe = document.getElementById('chatbotui-iframe');
 chatbotuiToggle.onclick = () => {
   chatbotuiIframe.style.display = chatbotuiIframe.style.display === 'block' ? 'none' : 'block';
-}; 
+};
+
+// Accessibility: Close menu with Escape key and trap focus
+function closeMenu() {
+    hamburger.classList.remove('active');
+    navContainer.classList.remove('active');
+    overlay.classList.remove('active');
+    body.style.overflow = '';
+}
+
+document.addEventListener('keydown', (e) => {
+    if (navContainer.classList.contains('active')) {
+        if (e.key === 'Escape') {
+            closeMenu();
+        }
+        // Focus trap
+        const focusableLinks = navContainer.querySelectorAll('.nav-link');
+        if (focusableLinks.length > 0) {
+            const first = focusableLinks[0];
+            const last = focusableLinks[focusableLinks.length - 1];
+            if (e.key === 'Tab') {
+                if (e.shiftKey && document.activeElement === first) {
+                    e.preventDefault();
+                    last.focus();
+                } else if (!e.shiftKey && document.activeElement === last) {
+                    e.preventDefault();
+                    first.focus();
+                }
+            }
+        }
+    }
+});
+
+// Real-time clock in footer
+function updateFooterClock() {
+    const clock = document.getElementById('footer-clock');
+    if (clock) {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        clock.textContent = timeString;
+    }
+}
+document.addEventListener('DOMContentLoaded', function() {
+    setInterval(updateFooterClock, 1000);
+    updateFooterClock();
+}); 

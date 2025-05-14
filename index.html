@@ -14,18 +14,21 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="logo">Luigi.</div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div class="hamburger">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+        <div class="hamburger" aria-label="Open navigation menu" tabindex="0">
             <span></span>
             <span></span>
             <span></span>
         </div>
+        <div class="mobile-menu-overlay"></div>
     </nav>
 
     <!-- Hero Section -->
@@ -43,9 +46,15 @@
                 <img src="assets/avatar-hero.png" alt="Luigi Hero Avatar" class="avatar-img">
             </div>
             <div class="social-vertical">
-                <a href="https://www.linkedin.com/in/luigiatlinkdin/" class="social-icon" title="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/Wigibles" class="social-icon" title="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
-                <a href="https://www.facebook.com/luigisantiago231" class="social-icon" title="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.linkedin.com/in/luigiatlinkdin/" class="social-icon" title="LinkedIn" target="_blank" rel="noopener">
+                    <img src="assets/socials/3d-icon-linkedin.png" alt="LinkedIn" class="social-img" />
+                </a>
+                <a href="https://github.com/Wigibles" class="social-icon" title="GitHub" target="_blank" rel="noopener">
+                    <img src="assets/socials/3d-icon-github.png" alt="GitHub" class="social-img" />
+                </a>
+                <a href="https://www.facebook.com/luigisantiago231" class="social-icon" title="Facebook" target="_blank" rel="noopener">
+                    <img src="assets/socials/3d-icon-facebook.png" alt="Facebook" class="social-img" />
+                </a>
             </div>
         </div>
     </section>
@@ -54,7 +63,7 @@
     <section id="about" class="about custom-about">
         <div class="about-card about-flex">
             <div class="about-left">
-                <img src="assets/avatar-about.png" alt="Luigi About Avatar" class="about-avatar-img">
+                <img src="assets/avatar-hero.png" alt="Luigi About Avatar" class="about-avatar-img">
             </div>
             <div class="about-right">
                 <h2 class="about-title">About me</h2>
@@ -62,9 +71,15 @@
                 <p class="about-desc">Hey there! I'm a software developer with a love for all things Java. I build all kinds of systems—from web apps to mobile solutions—often mixing in the latest tech to keep things modern and efficient. I enjoy creating clean, scalable code and finding smart ways to solve real-world problems. Whether it's backend development, integrations, or full-stack projects, I'm always up for a challenge and excited to keep learning and improving!</p>
                 <div class="about-row">
                     <a href="assets/Luigi Santiago Resume.pdf" class="btn about-btn primary" download>Download CV</a>
-                    <a href="https://www.facebook.com/luigisantiago231" class="about-social-icon" title="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook"></i></a>
-                    <a href="https://www.linkedin.com/in/luigiatlinkdin/" class="about-social-icon" title="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://github.com/Wigibles" class="about-social-icon" title="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+                    <a href="https://www.facebook.com/luigisantiago231" class="about-social-icon" title="Facebook" target="_blank" rel="noopener">
+                        <img src="assets/socials/3d-icon-facebook.png" alt="Facebook" class="social-img" />
+                    </a>
+                    <a href="https://www.linkedin.com/in/luigiatlinkdin/" class="about-social-icon" title="LinkedIn" target="_blank" rel="noopener">
+                        <img src="assets/socials/3d-icon-linkedin.png" alt="LinkedIn" class="social-img" />
+                    </a>
+                    <a href="https://github.com/Wigibles" class="about-social-icon" title="GitHub" target="_blank" rel="noopener">
+                        <img src="assets/socials/3d-icon-github.png" alt="GitHub" class="social-img" />
+                    </a>
                 </div>
             </div>
         </div>
@@ -180,9 +195,15 @@
             <h2 class="contact-title">Contact Me</h2>
             <p class="contact-message">Let's build something great together. If you like what you see, feel free to reach out—I'm always open to new ideas and collaborations.</p>
             <div class="contact-socials">
-                <a href="https://www.facebook.com/luigisantiago231" class="contact-social-icon" target="_blank" rel="noopener" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.linkedin.com/in/luigiatlinkdin/" class="contact-social-icon" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://github.com/Wigibles" class="contact-social-icon" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.facebook.com/luigisantiago231" class="contact-social-icon" target="_blank" rel="noopener" title="Facebook">
+                    <img src="assets/socials/3d-icon-facebook.png" alt="Facebook" class="social-img" />
+                </a>
+                <a href="https://www.linkedin.com/in/luigiatlinkdin/" class="contact-social-icon" target="_blank" rel="noopener" title="LinkedIn">
+                    <img src="assets/socials/3d-icon-linkedin.png" alt="LinkedIn" class="social-img" />
+                </a>
+                <a href="https://github.com/Wigibles" class="contact-social-icon" target="_blank" rel="noopener" title="GitHub">
+                    <img src="assets/socials/3d-icon-github.png" alt="GitHub" class="social-img" />
+                </a>
             </div>
         </div>
     </section>
@@ -192,6 +213,7 @@
         <div class="footer-left">
             <span class="contact-location"><i class="fas fa-map-marker-alt"></i> Philippines</span>
             <span class="contact-copyright">© <script>document.write(new Date().getFullYear())</script>, All Rights By Luigi Santiago.</span>
+            <span id="footer-clock" style="margin-left: 1.5rem;"></span>
         </div>
     </footer>
 
