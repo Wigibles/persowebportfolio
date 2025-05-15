@@ -10,38 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
             loadingScreen.remove();
         }, 500);
     });
-
-    // Handle lazy loading images
-    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-    
-    if ('loading' in HTMLImageElement.prototype) {
-        // Browser supports native lazy loading
-        lazyImages.forEach(img => {
-            img.addEventListener('load', () => {
-                img.classList.add('loaded');
-            });
-        });
-    } else {
-        // Fallback for browsers that don't support lazy loading
-        const lazyLoadObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.addEventListener('load', () => {
-                        img.classList.add('loaded');
-                    });
-                    observer.unobserve(img);
-                }
-            });
-        });
-
-        lazyImages.forEach(img => {
-            img.dataset.src = img.src;
-            img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"%3E%3C/svg%3E';
-            lazyLoadObserver.observe(img);
-        });
-    }
 });
 
 // Mobile Navigation Toggle
