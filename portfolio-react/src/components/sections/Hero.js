@@ -81,7 +81,7 @@ const Hero = () => {
         <div className="hero-buttons">
           <button onClick={() => scrollToSection('contact')} className="btn hero-btn primary">Get in touch</button>
           <a 
-            href="/assets/Luigi Santiago Resume.pdf" 
+            href="/assets/Luigi%20Santiago%20Resume.pdf" 
             className="btn hero-btn secondary" 
             download="Luigi-Santiago-Resume.pdf"
           >

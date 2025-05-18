@@ -119,7 +119,10 @@ const ProjectDetail = () => {
           <Link to="/#projects" className="btn project-back-btn">&larr; Back to Projects</Link>
           <h1 className="project-detail-title">{project.title}</h1>
           <div className="project-meta">
-            <b>Year:</b> {project.year} &nbsp; <b>Role:</b> {project.role}
+            <b>Year:</b> {project.year}
+          </div>
+          <div className="project-meta">
+            <b>Role:</b> {project.role}
           </div>
           <p className="project-detail-desc">{project.desc}</p>
           <div className="project-detail-tech">
