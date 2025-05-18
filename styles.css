@@ -78,10 +78,18 @@ body {
     scrollbar-width: thin;
     scrollbar-color: #ffe14d #222;
 }
-body::-webkit-scrollbar {
-    width: 10px;
-    background: #222;
+
+/* Hide scrollbar for Chrome, Safari, Opera, and everywhere */
+body::-webkit-scrollbar, html::-webkit-scrollbar {
+    display: none !important;
 }
+
+/* Hide scrollbar for IE, Edge and Firefox */
+body, html {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;     /* Firefox */
+}
+
 body::-webkit-scrollbar-thumb {
     background: #ffe14d;
     border-radius: 8px;
@@ -104,7 +112,7 @@ body::-webkit-scrollbar {
     top: 0;
     left: 0;
     width: 100%;
-    padding: 0.7rem 3%;
+    padding: 0.3rem 3%;
     background: #000;
     display: flex;
     justify-content: space-between;
@@ -123,8 +131,7 @@ body::-webkit-scrollbar {
 }
 
 .logo {
-    display: block;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: #ffe14d;
     letter-spacing: 1px;
@@ -150,7 +157,7 @@ body::-webkit-scrollbar {
     text-decoration: none;
     color: #fff;
     font-weight: 500;
-    font-size: 1.1rem;
+    font-size: 1rem;
     transition: color 0.2s;
     position: relative;
 }
@@ -725,9 +732,13 @@ section h2 {
     align-items: center;
     max-width: 900px;
     margin: 0 auto;
+    overflow: visible !important;
 }
 
 .skill-item {
+    position: relative;
+    cursor: pointer;
+    overflow: visible;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -760,6 +771,32 @@ section h2 {
 
 .skill-item span {
     display: none;
+}
+
+.skill-label {
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translate(-50%, 0) scale(0.95);
+    background: #222;
+    color: #ffe14d;
+    padding: 0.35em 1em;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'IBM Plex Mono', 'SF Mono', 'Fira Mono', 'Consolas', monospace;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s cubic-bezier(.4,2,.6,1),
+                transform 0.25s cubic-bezier(.4,2,.6,1);
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+}
+
+.skill-item:hover .skill-label,
+.skill-item:focus .skill-label {
+    opacity: 1;
+    transform: translate(-50%, 10px) scale(1.05);
 }
 
 /* Contact Section */
@@ -807,18 +844,19 @@ section h2 {
     justify-content: center;
     width: 48px;
     height: 48px;
-    background: #fff;
+    background: none;
     border-radius: 12px;
     font-size: 1.7rem;
     color: #2196f3;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    transition: background 0.2s, color 0.2s, transform 0.2s;
+    box-shadow: none;
+    transition: none;
 }
 
 .contact-social-icon:hover {
-    background: #2196f3;
-    color: #fff;
-    transform: translateY(-3px) scale(1.08);
+    background: none;
+    color: #2196f3;
+    transform: none;
+    box-shadow: none;
 }
 
 .contact-footer {
@@ -1383,32 +1421,18 @@ section {
 }
 
 .about-subtitle {
-    font-size: 1.2rem;
-    font-weight: 700;
     color: #ffe14d;
-    margin-bottom: 1rem;
-    font-family: 'IBM Plex Mono', 'SF Mono', 'Fira Mono', 'Consolas', monospace;
-}
-
-.about-highlight {
-    color: #ffe14d;
-    font-weight: 700;
-}
-
-.about-desc {
-    font-size: 1.05rem;
-    margin-bottom: 1.5rem;
-    color: #fff;
-    font-weight: 400;
-    line-height: 1.5;
-    max-width: 650px;
+    font-weight: 600;
+    line-height: 2.5;
+    font-size: 1.5rem;
+    max-width: 800px;
 }
 
 .about-row {
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-top: 0.5rem;
+    margin-top: 1.5rem;
 }
 
 .about-btn.primary {
@@ -1523,7 +1547,7 @@ section {
     }
     .about-row {
         gap: 0.5rem;
-        margin-top: 0.3rem;
+        margin-top: 2rem;
     }
 }
 

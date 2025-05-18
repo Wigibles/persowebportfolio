@@ -132,43 +132,66 @@ skillItems.forEach(item => {
     observer.observe(item);
 });
 
-// Typing animation for hero subtitle (roles)
-const heroTyping = document.getElementById('hero-typing');
-const heroCursor = document.querySelector('.typing-cursor');
-const roles = [
-    'Web Development',
-    'Mobile Development',
-    'Java Developer',
-    'FullStack Developer'
-];
-let roleIndex = 0;
-let charIdx = 0;
-let typing = true;
+function startTypingEffect(targetElement, roles, typingSpeed = 90, backSpeed = 50, pause = 1200, loopPause = 400) {
+    let roleIndex = 0;
+    let charIdx = 0;
+    let typing = true;
 
-function typeHeroRole() {
-    const currentRole = roles[roleIndex];
-    if (typing) {
-        if (charIdx <= currentRole.length) {
-            heroTyping.textContent = currentRole.substring(0, charIdx);
-            charIdx++;
-            setTimeout(typeHeroRole, 90);
+    function type() {
+        const currentRole = roles[roleIndex];
+        if (typing) {
+            if (charIdx <= currentRole.length) {
+                targetElement.textContent = currentRole.substring(0, charIdx);
+                charIdx++;
+                setTimeout(type, typingSpeed);
+            } else {
+                typing = false;
+                setTimeout(type, pause);
+            }
         } else {
-            typing = false;
-            setTimeout(typeHeroRole, 1200);
-        }
-    } else {
-        if (charIdx >= 0) {
-            heroTyping.textContent = currentRole.substring(0, charIdx);
-            charIdx--;
-            setTimeout(typeHeroRole, 50);
-        } else {
-            typing = true;
-            roleIndex = (roleIndex + 1) % roles.length;
-            setTimeout(typeHeroRole, 400);
+            if (charIdx >= 0) {
+                targetElement.textContent = currentRole.substring(0, charIdx);
+                charIdx--;
+                setTimeout(type, backSpeed);
+            } else {
+                typing = true;
+                roleIndex = (roleIndex + 1) % roles.length;
+                setTimeout(type, loopPause);
+            }
         }
     }
+    type();
 }
-typeHeroRole();
+
+document.addEventListener('DOMContentLoaded', function() {
+    const heroTyping = document.getElementById('hero-typing');
+    const aboutTyping = document.getElementById('about-typing');
+
+    if (heroTyping) startTypingEffect(heroTyping, [
+        'Web Development',
+        'Mobile Development',
+        'Java Developer',
+        'FullStack Developer'
+    ]);
+    if (aboutTyping) startTypingEffect(aboutTyping, [
+        'Software Developer',
+        'Java Developer',
+        'FullStack Developer',
+        'Problem Solver'
+    ]);
+
+    // Real-time clock in footer
+    function updateFooterClock() {
+        const clock = document.getElementById('footer-clock');
+        if (clock) {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            clock.textContent = timeString;
+        }
+    }
+    setInterval(updateFooterClock, 1000);
+    updateFooterClock();
+});
 
 const chatbotuiToggle = document.getElementById('chatbotui-toggle');
 const chatbotuiIframe = document.getElementById('chatbotui-iframe');
@@ -205,18 +228,4 @@ document.addEventListener('keydown', (e) => {
             }
         }
     }
-});
-
-// Real-time clock in footer
-function updateFooterClock() {
-    const clock = document.getElementById('footer-clock');
-    if (clock) {
-        const now = new Date();
-        const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        clock.textContent = timeString;
-    }
-}
-document.addEventListener('DOMContentLoaded', function() {
-    setInterval(updateFooterClock, 1000);
-    updateFooterClock();
 }); 
