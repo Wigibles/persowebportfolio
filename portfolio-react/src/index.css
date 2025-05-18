@@ -1,0 +1,103 @@
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'IBM Plex Mono', 'SF Mono', 'Fira Mono', 'Consolas', monospace;
+  line-height: 1.6;
+  color: #1f2937;
+  background: #FFDD55;
+  font-size: 1.15rem;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Scrolling and section handling */
+html {
+  scroll-behavior: smooth;
+  font-size: 20px;
+  scroll-padding-top: 80px; /* Increased padding for fixed navbar */
+}
+
+/* Section sizing based on content */
+section {
+  width: 100%;
+  position: relative;
+  overflow: visible;
+  padding: 30px 0; /* Further reduced padding */
+  box-sizing: border-box;
+}
+
+/* Only hero section should be full height */
+#home.hero {
+  min-height: 100vh;
+  padding: 0;
+  margin-top: 0;
+}
+
+#about, #projects, #skills, #contact {
+  padding-top: 60px; /* Reduced padding to account for fixed navbar */
+  padding-bottom: 20px; /* Smaller bottom padding */
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Section-specific scroll padding to correctly position when navigating */
+#skills {
+  scroll-margin-top: 90px; /* Specific adjustment for Skills section */
+}
+
+#projects {
+  scroll-margin-top: 80px; /* Specific adjustment for Projects section */
+  min-height: calc(100vh - 80px); /* Make it take at least a full viewport minus navbar */
+}
+
+#contact {
+  scroll-margin-top: 80px; /* Specific adjustment for Contact section */
+  min-height: calc(100vh - 100px); /* Make it take enough vertical space */
+  padding-bottom: 50px; /* Add extra padding at bottom */
+}
+
+/* Default link styles */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+/* Button defaults */
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+/* Debug indicator for section boundaries */
+.section-indicator {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  padding: 5px 10px;
+  font-size: 12px;
+  z-index: 100;
+  display: none; /* Hidden by default, enable for debugging */
+}
+
+/* Remove transitions in development to avoid flashes */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+} 

@@ -1,0 +1,79 @@
+/* App container */
+.App {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Main content container that holds all sections */
+.main-content {
+  min-height: 100vh;
+  width: 100%;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Make sure content flows properly */
+section {
+  overflow: visible;
+  width: 100%;
+  display: flex;
+  position: relative;
+  scroll-margin-top: 80px; /* Ensures navbar doesn't overlap when scrolling */
+}
+
+/* Section dividers for visual separation */
+section:not(:first-child)::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 5%;
+  right: 5%;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.05);
+  display: none; /* Hidden by default, enable for visual separation */
+}
+
+/* Loading screen styles */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.loader-circle {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #ffe14d;
+  border-top: 4px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loader-text {
+  color: #ffe14d;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+} 
