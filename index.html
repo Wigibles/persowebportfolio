@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="assets/head/logo-icon-tab.png">
 </head>
 <body>
@@ -42,10 +43,12 @@
     <!-- Hero Section -->
     <section id="home" class="hero custom-hero">
         <div class="hero-content-centered">
-            <h1 class="hero-title fade-in">Hello, I'm Luigi</h1>
-            <p class="hero-subtitle">Software Developer , Java Developer</p>
+            <h1 class="hero-title fade-in">Luigi Santiago</h1>
+            <p class="hero-subtitle">
+                <span id="hero-typing"></span><span class="typing-cursor">|</span>
+            </p>
             <div class="hero-buttons">
-                <a href="#contact" class="btn hero-btn primary">Hire me</a>
+                <a href="#contact" class="btn hero-btn primary">Get in touch</a>
                 <a href="assets/Luigi Santiago Resume.pdf" class="btn hero-btn secondary" download="Luigi-Santiago-Resume.pdf">Download CV</a>
             </div>
         </div>
@@ -96,84 +99,22 @@
     <!-- Projects Section -->
     <section id="projects" class="projects">
         <h2>Projects</h2>
-        <p class="projects-subtitle">Here are some of the projects and collaborations I worked on during my academic journey.</p>
-        <div class="projects-list">
+        <div class="projects-grid">
             <!-- Project 1 -->
-            <div class="project-card project-yellow">
-                <div class="project-card-content">
-                    <div class="project-image">
-                        <img src="assets/projects/bulsufind.png" alt="BulSUFind Screenshot">
-                    </div>
-                    <div class="project-info">
-                        <h3>BulSUFind</h3>
-                        <p>A mobile app for managing lost and found items at Bulacan State University. Built with native Android, Java, Google API, REST, and Firebase, it streamlines item reporting, searching (including image-based search), real-time notifications, and user chat for efficient recovery and communication.</p>
-                        <div class="project-details">
-                            <div class="project-info-table">
-                                <div><span>Year</span><span>2024</span></div>
-                                <div><span>Role</span><span>Web & Mobile Developer</span></div>
-                            </div>
-                            <div class="project-tech">
-                                <span>Java</span>
-                                <span>JavaScript</span>
-                                <span>Android</span>
-                                <span>Google API / GCloud</span>
-                                <span>REST</span>
-                                <span>Firebase</span>
-                            </div>
-                        </div>
-                        <a href="#" class="btn project-btn">View Project</a>
-                    </div>
-                </div>
-            </div>
+            <a class="project-card" href="project.html?id=bulsufind">
+                <img src="assets/projects/bulsufind.png" alt="BulSUFind Screenshot" class="project-img">
+                <div class="project-title">BulSUFind</div>
+            </a>
             <!-- Project 2 -->
-            <div class="project-card project-blue">
-                <div class="project-card-content">
-                    <div class="project-image">
-                        <img src="assets/projects/coding-chronicles.png" alt="Coding Chronicles Screenshot">
-                    </div>
-                    <div class="project-info">
-                        <h3>Coding Chronicles</h3>
-                        <p>Led development of a 2D platformer game, building the core gameplay, physics, and cross-platform architecture for PC and Android. Created most visual assets and coordinated integration of all game elements for a cohesive experience.</p>
-                        <div class="project-details">
-                            <div class="project-info-table">
-                                <div><span>Year</span><span>2024</span></div>
-                                <div><span>Role</span><span>Lead Programmer & Game Designer</span></div>
-                            </div>
-                            <div class="project-tech">
-                                <span>Unity</span>
-                                <span>C#</span>
-                                <span>Android</span>
-                            </div>
-                        </div>
-                        <a href="https://www.youtube.com/watch?v=CZxOOZRPv8w" class="btn project-btn" target="_blank" rel="noopener">View Project</a>
-                    </div>
-                </div>
-            </div>
+            <a class="project-card" href="project.html?id=coding-chronicles">
+                <img src="assets/projects/coding-chronicles.png" alt="Coding Chronicles Screenshot" class="project-img">
+                <div class="project-title">Coding Chronicles</div>
+            </a>
             <!-- Project 3 -->
-            <div class="project-card project-teal">
-                <div class="project-card-content">
-                    <div class="project-image">
-                        <img src="assets/projects/bulsu-classroom.png" alt="BulSU Classroom Screenshot">
-                    </div>
-                    <div class="project-info">
-                        <h3>BulSU Classroom</h3>
-                        <p>Developed an automated quiz and grading system with anti-cheating features, real-time monitoring, and grade computation. Designed user interfaces and integrated the system with other platform features using JavaScript and browser APIs.</p>
-                        <div class="project-details">
-                            <div class="project-info-table">
-                                <div><span>Year</span><span>2024</span></div>
-                                <div><span>Role</span><span>Quiz System & Assessment Module Lead</span></div>
-                            </div>
-                            <div class="project-tech">
-                                <span>JavaScript</span>
-                                <span>Bootstrap</span>
-                                <span>Python</span>
-                                <span>Browser APIs</span>
-                            </div>
-                        </div>
-                        <a href="#" class="btn project-btn">View Project</a>
-                    </div>
-                </div>
-            </div>
+            <a class="project-card" href="project.html?id=bulsu-classroom">
+                <img src="assets/projects/bulsu-classroom.png" alt="BulSU Classroom Screenshot" class="project-img">
+                <div class="project-title">BulSU Classroom</div>
+            </a>
         </div>
     </section>
 

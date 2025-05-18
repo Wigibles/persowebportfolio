@@ -132,44 +132,43 @@ skillItems.forEach(item => {
     observer.observe(item);
 });
 
-// Add animation to project cards
-const projectCards = document.querySelectorAll('.project-card');
-projectCards.forEach(card => {
-    observer.observe(card);
-});
+// Typing animation for hero subtitle (roles)
+const heroTyping = document.getElementById('hero-typing');
+const heroCursor = document.querySelector('.typing-cursor');
+const roles = [
+    'Web Development',
+    'Mobile Development',
+    'Java Developer',
+    'FullStack Developer'
+];
+let roleIndex = 0;
+let charIdx = 0;
+let typing = true;
 
-// Typing animation for hero title
-const typingText = document.getElementById('typing-text');
-const cursor = document.querySelector('.typing-cursor');
-const textToType = "Hello, I'm Luigi";
-const typingSpeed = 100;
-const deletingSpeed = 60;
-const delayAfterTyping = 1200;
-const delayAfterDeleting = 500;
-let charIndex = 0;
-let isDeleting = false;
-
-function typeLoop() {
-    if (!isDeleting && charIndex <= textToType.length) {
-        typingText.textContent = textToType.substring(0, charIndex);
-        charIndex++;
-        setTimeout(typeLoop, typingSpeed);
-    } else if (isDeleting && charIndex >= 0) {
-        typingText.textContent = textToType.substring(0, charIndex);
-        charIndex--;
-        setTimeout(typeLoop, deletingSpeed);
-    } else if (!isDeleting && charIndex > textToType.length) {
-        isDeleting = true;
-        setTimeout(typeLoop, delayAfterTyping);
-    } else if (isDeleting && charIndex < 0) {
-        isDeleting = false;
-        setTimeout(typeLoop, delayAfterDeleting);
+function typeHeroRole() {
+    const currentRole = roles[roleIndex];
+    if (typing) {
+        if (charIdx <= currentRole.length) {
+            heroTyping.textContent = currentRole.substring(0, charIdx);
+            charIdx++;
+            setTimeout(typeHeroRole, 90);
+        } else {
+            typing = false;
+            setTimeout(typeHeroRole, 1200);
+        }
+    } else {
+        if (charIdx >= 0) {
+            heroTyping.textContent = currentRole.substring(0, charIdx);
+            charIdx--;
+            setTimeout(typeHeroRole, 50);
+        } else {
+            typing = true;
+            roleIndex = (roleIndex + 1) % roles.length;
+            setTimeout(typeHeroRole, 400);
+        }
     }
 }
-
-typeLoop();
-
-// (Fade-in on scroll for sections removed) 
+typeHeroRole();
 
 const chatbotuiToggle = document.getElementById('chatbotui-toggle');
 const chatbotuiIframe = document.getElementById('chatbotui-iframe');
