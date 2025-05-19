@@ -14,7 +14,33 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     margin-bottom: 0;
-    transition: background 0.3s, padding 0.3s;
+    transition: background 0.3s, padding 0.3s, box-shadow 0.3s;
+}
+
+/* Transparent navbar style for hero section */
+.navbar.transparent {
+    background: transparent;
+    box-shadow: none;
+}
+
+.navbar.transparent .nav-links a {
+    color: #000;
+    font-weight: 500;
+    font-size: 15px;
+    padding-right: 50px;
+}
+
+.navbar.transparent .hamburger span {
+    background-color: #000;
+}
+
+.navbar.transparent .nav-links a::after {
+    background-color: #000;
+    height: 2px;
+}
+
+.navbar.transparent .logo a {
+    color: #000;
 }
 
 .navbar.scrolled {
@@ -33,6 +59,7 @@
 .logo a {
     color: #ffe14d;
     text-decoration: none;
+    transition: color 0.3s;
 }
 
 .nav-container {
@@ -55,24 +82,51 @@
     text-decoration: none;
     color: #fff;
     font-weight: 500;
-    font-size: 1rem;
-    transition: color 0.2s;
+    font-size: 15px;
+    padding-right: 50px;
+    transition: all 0.3s ease;
     position: relative;
+    letter-spacing: 0.5px;
 }
 
+/* Remove previous hover effects */
+.nav-links a::before,
 .nav-links a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -4px;
-    left: 0;
-    background-color: #ffe14d;
-    transition: width 0.3s ease;
+    display: none;
 }
 
-.nav-links a:hover::after {
-    width: 100%;
+.navbar.transparent .nav-links a::before,
+.navbar.transparent .nav-links a::after {
+    display: none;
+}
+
+/* New minimalist hover effect */
+.nav-links a {
+    opacity: 0.8;
+    border-bottom: 1px solid transparent;
+}
+
+.nav-links a:hover {
+    opacity: 1;
+    color: #ffe14d;
+    transform: translateY(-2px);
+}
+
+.navbar.transparent .nav-links a:hover {
+    color: #000;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+/* Active link indicator */
+.nav-links a.active {
+    opacity: 1;
+    font-weight: 600;
+    color: #ffe14d;
+}
+
+.navbar.transparent .nav-links a.active {
+    color: #000;
+    font-weight: 600;
 }
 
 .hamburger {
@@ -183,20 +237,27 @@
         width: 100%;
         font-size: 1.1rem;
         position: relative;
-        transition: color 0.3s ease;
+        transition: color 0.3s ease, transform 0.3s ease;
     }
+    
+    /* Remove old hover style */
     .nav-link::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 0;
-        height: 3px;
-        background: linear-gradient(90deg, #4a6cf7, #833dd3);
-        transition: width 0.3s ease;
+        display: none;
     }
-    .nav-link:hover::before {
-        width: 100%;
+    
+    /* New minimalist mobile hover effect */
+    .nav-link:hover {
+        transform: translateX(5px);
+        color: #000;
+        background-color: rgba(255, 225, 77, 0.1);
+    }
+    
+    /* Active link in mobile */
+    .nav-link.active {
+        font-weight: 600;
+        color: #000;
+        border-left: 3px solid #ffe14d;
+        background-color: rgba(255, 225, 77, 0.1);
     }
 }
 

@@ -5,6 +5,8 @@ import './Navbar.css';
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [inHeroSection, setInHeroSection] = useState(true);
+  const [activeSection, setActiveSection] = useState('home');
   const location = useLocation();
 
   useEffect(() => {
@@ -13,9 +15,34 @@ const Navbar = () => {
       if (isScrolled !== scrolled) {
         setScrolled(isScrolled);
       }
+      
+      // Check if we're in the hero section
+      const heroSection = document.getElementById('home');
+      if (heroSection) {
+        const heroRect = heroSection.getBoundingClientRect();
+        // Set inHeroSection to true if hero section is visible and takes up most of the viewport
+        setInHeroSection(heroRect.top >= -100 && heroRect.bottom > window.innerHeight / 2);
+      }
+      
+      // Determine active section for nav highlighting
+      const sections = ['home', 'about', 'projects', 'skills', 'contact'];
+      const currentSection = sections.find(section => {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return rect.top <= 150 && rect.bottom >= 150;
+        }
+        return false;
+      }) || 'home';
+      
+      setActiveSection(currentSection);
     };
 
     window.addEventListener('scroll', handleScroll);
+    
+    // Initial check when component mounts
+    handleScroll();
+    
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -33,6 +60,7 @@ const Navbar = () => {
 
   const scrollToSection = (sectionId) => {
     closeMobileMenu();
+    setActiveSection(sectionId);
     
     if (location.pathname !== '/') {
       // If we're not on the home page, navigate to home and then scroll
@@ -100,35 +128,58 @@ const Navbar = () => {
     }
   };
 
+  // Determine the navbar class based on scroll position and hero section visibility
+  const navbarClass = inHeroSection && !scrolled ? 'navbar transparent' : `navbar ${scrolled ? 'scrolled' : ''}`;
+
   return (
-    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+    <nav className={navbarClass}>
       <div className="logo">
         <Link to="/">Luigi.</Link>
       </div>
       <div className={`nav-container ${mobileMenuOpen ? 'active' : ''}`}>
         <ul className="nav-links">
           <li>
-            <Link to="/" className="nav-link" onClick={() => scrollToSection('home')}>
+            <Link 
+              to="/" 
+              className={`nav-link ${activeSection === 'home' ? 'active' : ''}`} 
+              onClick={() => scrollToSection('home')}
+            >
               Home
             </Link>
           </li>
           <li>
-            <Link to="/" className="nav-link" onClick={() => scrollToSection('about')}>
+            <Link 
+              to="/" 
+              className={`nav-link ${activeSection === 'about' ? 'active' : ''}`} 
+              onClick={() => scrollToSection('about')}
+            >
               About
             </Link>
           </li>
           <li>
-            <Link to="/" className="nav-link" onClick={() => scrollToSection('projects')}>
+            <Link 
+              to="/" 
+              className={`nav-link ${activeSection === 'projects' ? 'active' : ''}`} 
+              onClick={() => scrollToSection('projects')}
+            >
               Projects
             </Link>
           </li>
           <li>
-            <Link to="/" className="nav-link" onClick={() => scrollToSection('skills')}>
+            <Link 
+              to="/" 
+              className={`nav-link ${activeSection === 'skills' ? 'active' : ''}`} 
+              onClick={() => scrollToSection('skills')}
+            >
               Skills
             </Link>
           </li>
           <li>
-            <Link to="/" className="nav-link" onClick={() => scrollToSection('contact')}>
+            <Link 
+              to="/" 
+              className={`nav-link ${activeSection === 'contact' ? 'active' : ''}`} 
+              onClick={() => scrollToSection('contact')}
+            >
               Contact
             </Link>
           </li>
