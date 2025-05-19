@@ -52,26 +52,74 @@
     justify-content: center;
     width: 60px;
     height: 60px;
-    background: none;
-    border-radius: 12px;
+    background: #fff;
+    border-radius: 50%;
     color: #2196f3;
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     position: relative;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    text-decoration: none !important;
 }
 
 .contact-social-icon img {
-    width: 60px;
-    height: 60px;
+    width: 53px;
+    height: 53px;
     object-fit: contain;
+    transition: transform 0.25s ease;
 }
 
 .contact-social-icon:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
 }
 
 .contact-social-icon:hover .social-img {
-    transform: scale(1.18) rotate(-8deg);
-    box-shadow: 0 4px 18px rgba(37,99,235,0.18);
+    transform: scale(1.1);
+}
+
+/* Tooltip for social icons */
+.contact-social-icon::before {
+    content: attr(title);
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #222;
+    color: #FFDD55;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'IBM Plex Mono', 'SF Mono', 'Fira Mono', 'Consolas', monospace;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+    transition: all 0.3s ease;
+}
+
+/* Triangle/pointer for tooltip */
+.contact-social-icon::after {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 8px 8px 0;
+    border-style: solid;
+    border-color: #222 transparent transparent;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Show tooltip on hover */
+.contact-social-icon:hover::before,
+.contact-social-icon:hover::after {
+    opacity: 1;
+    visibility: visible;
 }
 
 .contact-location {
@@ -112,4 +160,33 @@
     .contact-socials {
         margin-bottom: 1.5rem;
     }
+}
+
+.contact-social-icon::after,
+.contact-social-icon::before {
+    border-color: #222 transparent transparent;
+}
+
+.contact-social-icon:link::after,
+.contact-social-icon:visited::after,
+.contact-social-icon:focus::after,
+.contact-social-icon:active::after,
+.contact-social-icon:hover::after,
+.contact-social-icon:link::before,
+.contact-social-icon:visited::before,
+.contact-social-icon:focus::before,
+.contact-social-icon:active::before,
+.contact-social-icon:hover::before {
+    /* Only reset tooltip properties */
+    background: #222;
+    color: #FFDD55;
+    /* No gradients */
+    background-image: none;
+}
+
+/* Override any global anchor styles */
+.contact-social-icon:hover:not([class^="tooltip"])::after {
+    width: 0 !important;
+    background: transparent !important;
+    background-image: none !important;
 } 

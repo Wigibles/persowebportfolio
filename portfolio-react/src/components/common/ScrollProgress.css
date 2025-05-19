@@ -1,0 +1,79 @@
+.scroll-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.scroll-progress-bar {
+  height: 3px;
+  background: #FFDD55;
+  transition: width 0.2s ease;
+}
+
+.scroll-indicators {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  pointer-events: auto;
+}
+
+.scroll-indicator {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.scroll-indicator.active .indicator-dot {
+  background: #FFDD55;
+  border: 2px solid #000;
+  transform: scale(1.2);
+}
+
+.indicator-label {
+  margin-left: 8px;
+  opacity: 0;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  transform: translateX(10px);
+  transition: all 0.3s ease;
+  color: #000;
+}
+
+.scroll-indicator:hover .indicator-label,
+.scroll-indicator.active .indicator-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Media query for mobile */
+@media (max-width: 768px) {
+  .scroll-indicators {
+    right: 10px;
+  }
+  
+  .indicator-dot {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .indicator-label {
+    display: none;
+  }
+} 

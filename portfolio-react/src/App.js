@@ -8,6 +8,10 @@ import Projects from './components/sections/Projects';
 import Skills from './components/sections/Skills';
 import Contact from './components/sections/Contact';
 import ProjectDetail from './components/sections/ProjectDetail';
+import ScrollProgress from './components/common/ScrollProgress';
+import ScrollToTop from './components/common/ScrollToTop';
+import Skeleton from './components/common/Skeleton';
+import SectionObserver from './components/common/SectionObserver';
 import './App.css';
 
 // Location observer component to handle navigation state changes
@@ -71,13 +75,39 @@ const SectionIndicator = ({ name }) => (
 
 // Home component to ensure all sections render properly
 function Home() {
+  const [isLoaded, setIsLoaded] = useState(false);
+  
+  useEffect(() => {
+    // Simulate content loading delay
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 500);
+    
+    return () => clearTimeout(timer);
+  }, []);
+  
   return (
     <div className="main-content">
-      <Hero />
-      <About />
-      <Projects />
-      <Skills />
-      <Contact />
+      {!isLoaded ? (
+        <>
+          <div className="skeleton-hero">
+            <Skeleton type="title" />
+            <Skeleton type="text" count={2} />
+            <div className="skeleton-buttons">
+              <Skeleton type="button" />
+              <Skeleton type="button" />
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <Hero />
+          <About />
+          <Projects />
+          <Skills />
+          <Contact />
+        </>
+      )}
     </div>
   );
 }
@@ -107,11 +137,14 @@ function App() {
         ) : (
           <>
             <ScrollToSection />
+            <ScrollProgress />
             <Navbar />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/project/:id" element={<ProjectDetail />} />
             </Routes>
+            <SectionObserver />
+            <ScrollToTop />
             <Footer />
           </>
         )}
