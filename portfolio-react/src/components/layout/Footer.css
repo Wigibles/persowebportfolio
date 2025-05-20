@@ -1,61 +1,252 @@
- /* Footer */
+/* Footer */
 .footer {
-    background: #1f2937;
-    color: white;
-    padding: 2rem 5%;
-    text-align: center;
     position: relative;
+    width: 100%;
+    padding: 2rem 5%;
+    background: rgba(240, 243, 248, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.03);
+    z-index: 100;
+    overflow: hidden;
 }
 
-.footer-left {
+/* Gradient background for footer */
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(28, 58, 148, 0.03) 0%, rgba(45, 71, 102, 0.05) 100%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.footer-content {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 1.2rem;
-    justify-content: flex-start;
-    font-size: 1rem;
-    color: #fff;
+    justify-content: center;
+    gap: 1rem;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    text-align: left;
+    text-align: center;
 }
 
-.contact-location {
+.footer-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, rgba(28, 58, 148, 0.9), rgba(45, 71, 102, 0.9));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.footer-text {
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+/* Horizontal Marquee Styling */
+.skills-marquee-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    height: 60px;
+    overflow: hidden;
+    margin: 1.5rem 0;
+    background: rgba(240, 243, 248, 0.5);
+    border-radius: 30px;
+    padding: 0;
+}
+
+/* Gradient overlays for fade effect */
+.gradient-overlay {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 120px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.gradient-overlay.left {
+    left: 0;
+    background: linear-gradient(90deg, rgba(240, 243, 248, 1) 0%, rgba(240, 243, 248, 0.8) 30%, rgba(240, 243, 248, 0) 100%);
+}
+
+.gradient-overlay.right {
+    right: 0;
+    background: linear-gradient(270deg, rgba(240, 243, 248, 1) 0%, rgba(240, 243, 248, 0.8) 30%, rgba(240, 243, 248, 0) 100%);
+}
+
+.skills-marquee-wrapper {
+    position: absolute;
+    display: flex;
+    width: max-content;
+    animation: marquee 70s linear infinite;
+    will-change: transform;
+}
+
+.skills-marquee {
+    display: flex;
+    gap: 18px;
+    padding: 0 25px;
+    height: 100%;
+    align-items: center;
+    width: max-content;
+    flex-shrink: 0;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Ensure the animation restarts seamlessly */
+@media (prefers-reduced-motion: no-preference) {
+    .skills-marquee-wrapper {
+        animation: marquee 60s linear infinite;
+    }
+}
+
+.skill-badge {
     display: flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 8px;
+    background: linear-gradient(135deg, rgba(28, 58, 148, 0.9), rgba(45, 71, 102, 0.9));
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
 }
 
-.location-icon {
-    color: #ffe14d !important;
-    font-size: 1.1rem;
+.skill-badge-icon {
+    font-size: 0.9rem;
 }
 
-.contact-copyright {
-    font-size: 1rem;
-    color: #fff;
+.skill-badge-text {
+    white-space: nowrap;
 }
 
-#footer-clock {
-    color: #fff;
-    font-weight: bold;
-    font-size: 1.1rem;
-    margin-left: 2rem;
-    letter-spacing: 1px;
-    vertical-align: middle;
+/* Footer social styling */
+.footer-social {
+    display: flex;
+    gap: 1rem;
+    margin: 0.5rem 0;
 }
 
-@media (max-width: 700px) {
-    .footer-left {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-        font-size: 0.95rem;
-        padding-left: 0;
+.footer-social-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(28, 58, 148, 0.1), rgba(45, 71, 102, 0.1));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.footer-social-icon:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(135deg, rgba(28, 58, 148, 0.2), rgba(45, 71, 102, 0.2));
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.footer-social-img {
+    width: 18px;
+    height: 18px;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.footer-social-icon:hover .footer-social-img {
+    opacity: 0.9;
+}
+
+.copyright {
+    margin-top: 1rem;
+    font-size: 0.75rem;
+    color: #777;
+}
+
+/* Media query for small screens */
+@media (max-width: 768px) {
+    .footer {
+        padding: 1.5rem 5%;
     }
     
-    #footer-clock {
-        margin-left: 0;
-        font-size: 1rem;
+    .footer-logo {
+        font-size: 1.3rem;
+    }
+    
+    .footer-text {
+        font-size: 0.8rem;
+    }
+    
+    .skills-marquee-container {
+        height: 50px;
+        margin: 1rem 0;
+    }
+    
+    .skill-badge {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.8rem;
+    }
+    
+    .gradient-overlay {
+        width: 80px;
+    }
+    
+    .skills-marquee-wrapper {
+        animation: marquee 80s linear infinite;
+    }
+    
+    .skills-marquee {
+        gap: 15px;
+        padding: 0 20px;
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+    .skills-marquee-container {
+        height: 40px;
+        border-radius: 20px;
+    }
+    
+    .skill-badge {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.7rem;
+    }
+    
+    .gradient-overlay {
+        width: 60px;
+    }
+    
+    .skills-marquee-wrapper {
+        animation: marquee 65s linear infinite;
+    }
+    
+    .skills-marquee {
+        gap: 16px;
+        padding: 0 15px;
     }
 } 

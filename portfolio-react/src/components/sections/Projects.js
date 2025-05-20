@@ -50,6 +50,7 @@ const Projects = () => {
   useEffect(() => {
     // Initial filter
     setFilteredProjects(projects);
+    setAnimateCards(true);
     
     // Check if the current URL has the projects hash
     if (location.hash === '#projects' && projectsRef.current) {
@@ -94,11 +95,12 @@ const Projects = () => {
       </div>
       
       <div className={`projects-grid ${animateCards ? 'animate' : ''}`}>
-        {filteredProjects.map(project => (
+        {filteredProjects.map((project, index) => (
           <Link 
             key={project.id} 
             to={`/project/${project.id}`} 
             className="project-card"
+            style={{ animationDelay: `${index * 0.1}s` }}
           >
             <img 
               src={project.image} 

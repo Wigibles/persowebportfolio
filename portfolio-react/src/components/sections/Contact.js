@@ -1,9 +1,35 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './Contact.css';
 import linkedinIcon from '../../assets/socials/3d-icon-linkedin.png';
 import githubIcon from '../../assets/socials/3d-icon-github.png';
 import facebookIcon from '../../assets/socials/3d-icon-facebook.png';
+
+// Custom SocialIcon component with better tooltip handling
+const SocialIcon = ({ href, title, icon, alt }) => {
+  const [showTooltip, setShowTooltip] = useState(false);
+  
+  return (
+    <div className="social-icon-wrapper">
+      <a 
+        href={href}
+        className="contact-social-icon" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        onMouseEnter={() => setShowTooltip(true)}
+        onMouseLeave={() => setShowTooltip(false)}
+      >
+        <img src={icon} alt={alt} className="social-img" />
+        {showTooltip && (
+          <div className="social-tooltip">
+            <span>{title}</span>
+            <div className="tooltip-arrow"></div>
+          </div>
+        )}
+      </a>
+    </div>
+  );
+};
 
 const Contact = () => {
   const contactRef = useRef(null);
@@ -27,33 +53,24 @@ const Contact = () => {
           Let's build something great together. If you like what you see, feel free to reach out—I'm always open to new ideas and collaborations.
         </p>
         <div className="contact-socials">
-          <a 
+          <SocialIcon 
             href="https://www.facebook.com/luigisantiago231" 
-            className="contact-social-icon" 
-            target="_blank" 
-            rel="noopener noreferrer" 
             title="Facebook"
-          >
-            <img src={facebookIcon} alt="Facebook" className="social-img" />
-          </a>
-          <a 
+            icon={facebookIcon}
+            alt="Facebook"
+          />
+          <SocialIcon 
             href="https://www.linkedin.com/in/luigiatlinkdin/" 
-            className="contact-social-icon" 
-            target="_blank" 
-            rel="noopener noreferrer" 
             title="LinkedIn"
-          >
-            <img src={linkedinIcon} alt="LinkedIn" className="social-img" />
-          </a>
-          <a 
+            icon={linkedinIcon}
+            alt="LinkedIn"
+          />
+          <SocialIcon 
             href="https://github.com/Wigibles" 
-            className="contact-social-icon" 
-            target="_blank" 
-            rel="noopener noreferrer" 
             title="GitHub"
-          >
-            <img src={githubIcon} alt="GitHub" className="social-img" />
-          </a>
+            icon={githubIcon}
+            alt="GitHub"
+          />
         </div>
       </div>
     </section>

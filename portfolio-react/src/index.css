@@ -8,11 +8,26 @@
 body {
   font-family: 'IBM Plex Mono', 'SF Mono', 'Fira Mono', 'Consolas', monospace;
   line-height: 1.6;
-  color: #1f2937;
-  background: #FFDD55;
+  color: #333333;
+  background: #ffffff;
   font-size: 1.15rem;
   overflow-x: hidden;
   width: 100%;
+  position: relative;
+}
+
+/* Gradient overlay for the entire page */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top right, rgba(28, 58, 148, 0.08) 0%, transparent 50%),
+              radial-gradient(circle at bottom left, rgba(36, 48, 66, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
 }
 
 /* Scrolling and section handling */
@@ -22,13 +37,14 @@ html {
   scroll-padding-top: 80px; /* Increased padding for fixed navbar */
 }
 
-/* Section sizing based on content */
+/* Section styling */
 section {
   width: 100%;
   position: relative;
   overflow: visible;
-  padding: 30px 0; /* Further reduced padding */
+  padding: 40px 0;
   box-sizing: border-box;
+  background-color: transparent;
 }
 
 /* Only hero section should be full height */
@@ -39,8 +55,8 @@ section {
 }
 
 #about, #projects, #skills, #contact {
-  padding-top: 60px; /* Reduced padding to account for fixed navbar */
-  padding-bottom: 20px; /* Smaller bottom padding */
+  padding-top: 80px;
+  padding-bottom: 40px;
   margin-top: 0;
   display: flex;
   align-items: center;
@@ -48,18 +64,18 @@ section {
 
 /* Section-specific scroll padding to correctly position when navigating */
 #skills {
-  scroll-margin-top: 90px; /* Specific adjustment for Skills section */
+  scroll-margin-top: 90px;
 }
 
 #projects {
-  scroll-margin-top: 80px; /* Specific adjustment for Projects section */
-  min-height: calc(100vh - 80px); /* Make it take at least a full viewport minus navbar */
+  scroll-margin-top: 80px;
+  min-height: calc(100vh - 80px);
 }
 
 #contact {
-  scroll-margin-top: 80px; /* Specific adjustment for Contact section */
-  min-height: calc(100vh - 100px); /* Make it take enough vertical space */
-  padding-bottom: 50px; /* Add extra padding at bottom */
+  scroll-margin-top: 80px;
+  min-height: calc(100vh - 100px);
+  padding-bottom: 50px;
 }
 
 /* Default link styles */
@@ -75,6 +91,67 @@ button {
   border: none;
   background: none;
   font-family: inherit;
+}
+
+/* Custom gradients for sections */
+#home.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 70% 30%, rgba(28, 58, 148, 0.12) 0%, transparent 50%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+#about::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 30% 70%, rgba(36, 48, 66, 0.08) 0%, transparent 50%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+#skills::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 20%, rgba(32, 42, 58, 0.08) 0%, transparent 50%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+#projects::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 80% 50%, rgba(45, 71, 102, 0.08) 0%, transparent 50%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+#contact::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 80%, rgba(28, 58, 148, 0.08) 0%, transparent 50%);
+  z-index: -1;
+  pointer-events: none;
 }
 
 /* Debug indicator for section boundaries */

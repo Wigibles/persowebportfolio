@@ -1,10 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import './ScrollProgress.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 const ScrollProgress = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [activeSection, setActiveSection] = useState('home');
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
   const sections = ['home', 'about', 'projects', 'skills', 'contact'];
+  
+  // Check if the screen is mobile on component mount
+  useEffect(() => {
+    // Check initial screen size
+    const checkIfMobile = () => {
+      // Always start with navigation hidden
+      setIsExpanded(false);
+    };
+    
+    checkIfMobile();
+    
+    // Add resize listener
+    window.addEventListener('resize', checkIfMobile);
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,7 +53,7 @@ const ScrollProgress = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [sections]);
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -51,21 +70,68 @@ const ScrollProgress = () => {
       });
     }
   };
+  
+  const toggleExpand = () => {
+    setIsAnimating(true);
+    
+    if (isExpanded) {
+      // When hiding, add a small delay before changing state
+      // to allow for the animation to complete
+      setTimeout(() => {
+        setIsExpanded(false);
+        setIsAnimating(false);
+      }, 300);
+    } else {
+      // When showing, change state immediately
+      setIsExpanded(true);
+      setTimeout(() => {
+        setIsAnimating(false);
+      }, 500);
+    }
+  };
 
   return (
     <div className="scroll-progress-container">
       <div className="scroll-progress-bar" style={{ width: `${scrollPosition}%` }}></div>
-      <div className="scroll-indicators">
-        {sections.map(section => (
-          <div 
-            key={section}
-            className={`scroll-indicator ${activeSection === section ? 'active' : ''}`}
-            onClick={() => scrollToSection(section)}
-          >
-            <div className="indicator-dot"></div>
-            <span className="indicator-label">{section.charAt(0).toUpperCase() + section.slice(1)}</span>
-          </div>
-        ))}
+      
+      {/* Floating toggle button to show navigation */}
+      <button 
+        className={`floating-toggle-btn toggle-indicators-btn ${isExpanded || isAnimating ? 'hidden' : ''}`}
+        onClick={toggleExpand}
+        aria-label="Show navigation"
+        disabled={isAnimating}
+      >
+        <FontAwesomeIcon 
+          icon={faChevronLeft} 
+          className="toggle-icon"
+        />
+      </button>
+      
+      <div className={`scroll-navigation-container ${isExpanded ? 'expanded' : 'collapsed'}`}>
+        <button 
+          className="toggle-indicators-btn"
+          onClick={toggleExpand}
+          aria-label="Hide navigation"
+          disabled={isAnimating}
+        >
+          <FontAwesomeIcon 
+            icon={faChevronRight} 
+            className="toggle-icon"
+          />
+        </button>
+        
+        <div className="scroll-indicators">
+          {sections.map(section => (
+            <div 
+              key={section}
+              className={`scroll-indicator ${activeSection === section ? 'active' : ''}`}
+              onClick={() => scrollToSection(section)}
+            >
+              <div className="indicator-dot"></div>
+              <span className="indicator-label">{section.charAt(0).toUpperCase() + section.slice(1)}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

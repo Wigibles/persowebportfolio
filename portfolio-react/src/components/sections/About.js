@@ -163,11 +163,12 @@ const About = () => {
           <div className="education-container animate-fadeIn">
             <div className="education-row">
               <div className={`education-card ${expandedItems.edu1 ? 'expanded' : ''}`}>
-                <div className="education-icon">🎓</div>
-                <h3 className="education-degree">BS Information Technology</h3>
-                <div className="education-preview">
-                  <p className="education-school">Bulacan State University</p>
-                  <p className="education-years">2021 - 2025</p>
+                <div className="experience-header">
+                  <div className="experience-year">2021-2025</div>
+                  <h3 className="experience-title">BS Information Technology</h3>
+                </div>
+                <div className="experience-preview">
+                  <p className="experience-company">Bulacan State University</p>
                 </div>
                 <div className="education-content">
                   <div className="education-details">
@@ -187,11 +188,12 @@ const About = () => {
               </div>
               
               <div className={`education-card ${expandedItems.edu2 ? 'expanded' : ''}`}>
-                <div className="education-icon">🔬</div>
-                <h3 className="education-degree">STEM</h3>
-                <div className="education-preview">
-                  <p className="education-school">Cabiao Senior High School</p>
-                  <p className="education-years">2019 - 2021</p>
+                <div className="experience-header">
+                  <div className="experience-year">2019-2021</div>
+                  <h3 className="experience-title">STEM</h3>
+                </div>
+                <div className="experience-preview">
+                  <p className="experience-company">Cabiao Senior High School</p>
                 </div>
                 <div className="education-content">
                   <div className="education-details">
@@ -213,17 +215,17 @@ const About = () => {
             
             <div className="education-row">
               <div className={`education-card ${expandedItems.edu3 ? 'expanded' : ''}`}>
-                <div className="education-icon">📚</div>
-                <h3 className="education-degree">Junior High School</h3>
-                <div className="education-preview">
-                  <p className="education-school">Cabiao National High School</p>
-                  <p className="education-years">2015 - 2019</p>
+                <div className="experience-header">
+                  <div className="experience-year">2015-2019</div>
+                  <h3 className="experience-title">Junior High School</h3>
+                </div>
+                <div className="experience-preview">
+                  <p className="experience-company">Cabiao National High School</p>
                 </div>
                 <div className="education-content">
                   <div className="education-details">
                     <p>Graduated with Honors (Grade 8-10)</p>
                     <p>Active participant in school activities</p>
-                    
                   </div>
                 </div>
                 <button 
@@ -237,11 +239,12 @@ const About = () => {
               </div>
               
               <div className={`education-card ${expandedItems.edu4 ? 'expanded' : ''}`}>
-                <div className="education-icon">✏️</div>
-                <h3 className="education-degree">Elementary Education</h3>
-                <div className="education-preview">
-                  <p className="education-school">Cabiao Adventist Elementary School</p>
-                  <p className="education-years">2008 - 2015</p>
+                <div className="experience-header">
+                  <div className="experience-year">2008-2015</div>
+                  <h3 className="experience-title">Elementary Education</h3>
+                </div>
+                <div className="experience-preview">
+                  <p className="experience-company">Cabiao Adventist Elementary School</p>
                 </div>
                 <div className="education-content">
                   <div className="education-details">

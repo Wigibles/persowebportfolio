@@ -1,29 +1,62 @@
 /* Projects Section */
 .projects {
-    background: #FFDD55;
-    padding: 80px 0 60px 0;
+    background: linear-gradient(135deg, rgba(240, 243, 248, 0.9), rgba(255, 255, 255, 0.9));
+    padding: 80px 0 100px 0; /* Add extra padding at bottom for the curved transition */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-bottom: 80px;
+    margin-bottom: 0; /* Remove bottom margin */
     min-height: calc(100vh - 60px);
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+}
+
+/* Add a pseudo-element that will show through the mask of the section divider */
+.projects::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(135deg, rgba(240, 243, 248, 0.9), rgba(255, 255, 255, 0.9)); /* Same as skills section */
+    z-index: -1;
+}
+
+/* Create subtle gradient overlay */
+.projects::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 70% 30%, rgba(28, 58, 148, 0.08) 0%, transparent 50%);
+    z-index: 0;
+    pointer-events: none;
 }
 
 /* Special class when navigated directly to projects section */
 .projects.full-height-view {
     min-height: 100vh;
     padding-bottom: 100px;
-    margin-bottom: 100vh; /* Push content below out of view */
+    margin-bottom: 0; /* Set to 0 to maintain seamless transitions */
 }
 
 .projects h2 {
     font-size: 2.3rem;
     text-align: center;
     margin-bottom: 1rem;
-    color: #222;
+    color: #333;
     font-family: 'IBM Plex Mono', 'SF Mono', 'Fira Mono', 'Consolas', monospace;
     font-weight: 700;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(135deg, #1c3a94, #2d4766);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 /* Projects Grid Layout */
@@ -36,14 +69,16 @@
     width: 100%;
     padding: 0 20px;
     justify-items: center;
+    position: relative;
+    z-index: 1;
 }
 
 .project-card {
     position: relative;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.85);
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
     height: 100%;
     width: 100%;
@@ -52,11 +87,15 @@
     flex-direction: column;
     text-decoration: none;
     color: inherit;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(28, 58, 148, 0.05);
 }
 
 .project-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+    border-color: rgba(28, 58, 148, 0.1);
 }
 
 .project-img {
@@ -76,6 +115,7 @@
     font-weight: 600;
     text-align: center;
     transition: background-color 0.3s ease;
+    color: #333;
 }
 
 .project-card-overlay {
@@ -84,7 +124,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(255, 221, 85, 0), rgba(255, 221, 85, 0.9));
+    background: linear-gradient(to bottom, 
+                rgba(28, 58, 148, 0), 
+                rgba(28, 58, 148, 0.85));
     opacity: 0;
     transition: opacity 0.3s ease;
     display: flex;
@@ -99,7 +141,7 @@
 }
 
 .project-card-overlay .project-title {
-    color: #000;
+    color: #fff;
     text-align: left;
     padding: 0;
     margin-bottom: 10px;
@@ -107,7 +149,7 @@
 }
 
 .project-brief {
-    color: #000;
+    color: #fff;
     font-size: 0.9rem;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -119,7 +161,7 @@
 
 .view-project {
     margin-top: 10px;
-    color: #000;
+    color: #fff;
     font-weight: 600;
     text-decoration: underline;
 }
@@ -131,30 +173,49 @@
     flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
 }
 
 .filter-btn {
     background: transparent;
-    border: 2px solid #000;
+    border: 2px solid rgba(28, 58, 148, 0.7);
     padding: 8px 16px;
-    border-radius: 30px;
+    border-radius: 8px;
     font-size: 0.9rem;
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
-    color: #000;
+    color: #333;
 }
 
 .filter-btn:hover {
-    border-color: #000;
-    background-color: rgba(255, 221, 85, 0.4);
+    border-color: rgba(28, 58, 148, 0.9);
+    background-color: rgba(28, 58, 148, 0.05);
+    transform: translateY(-2px);
 }
 
 .filter-btn.active {
-    background-color: #000;
-    border-color: #000;
-    color: #FFDD55;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    background: linear-gradient(135deg, rgba(28, 58, 148, 0.9), rgba(45, 71, 102, 0.9));
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Animation for projects grid */
+.projects-grid.animate .project-card {
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Media Queries */
