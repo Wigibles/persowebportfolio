@@ -3,17 +3,17 @@
   "name": "Luigi Santiago - Software Developer Portfolio",
   "icons": [
     {
-      "src": "assets/logo-icon-tab",
+      "src": "assets/ls-logo-topbar.png",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "type": "image/png"
     },
     {
-      "src": "assets/logo-icon-tab",
+      "src": "assets/ls-logo-topbar.png",
       "type": "image/png",
       "sizes": "192x192"
     },  
     {
-      "src": "assets/logo-icon-tab",
+      "src": "assets/ls-logo-topbar.png",
       "type": "image/png",
       "sizes": "512x512"
     }
