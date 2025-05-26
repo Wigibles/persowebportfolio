@@ -7,6 +7,7 @@ import facebookIcon from '../../assets/socials/3d-icon-facebook.png';
 import bulsufindImg from '../../assets/projects/bulsufind.png';
 import codingChroniclesImg from '../../assets/projects/coding-chronicles.png';
 import bulsuClassroomImg from '../../assets/projects/bulsu-classroom.png';
+import barbershopAppImg from '../../assets/projects/barber-appointment.png';
 
 const ProjectDetail = () => {
   useEffect(() => {
@@ -17,6 +18,21 @@ const ProjectDetail = () => {
   
   // Project data hardcoded to match the original
   const projects = [
+    {
+      id: 'barbershop-appointment',
+      title: 'Barbershop Appointment System',
+      year: 2023,
+      role: 'Full-Stack Developer',
+      desc: 'Created a prototype of a Barbershop Website System using HTML, CSS, JavaScript, PHP, and MySQL. This system was developed as our final project in our System Analysis and Design course subject. The application features online appointment booking, service selection, and customer management capabilities.',
+      media: [
+        { type: 'image', src: barbershopAppImg, alt: 'Barbershop Appointment System Screenshot' },
+        { type: 'video', src: 'https://youtu.be/JleOAvKj8Ug', alt: 'Barbershop Appointment System Demo' }
+      ],
+      tech: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL', 'Bootstrap', 'AJAX', 'Full-Stack Development'],
+      links: [
+        { label: 'Watch Demo', url: 'https://youtu.be/JleOAvKj8Ug' }
+      ]
+    },
     {
       id: 'bulsufind',
       title: 'BulSUFind',

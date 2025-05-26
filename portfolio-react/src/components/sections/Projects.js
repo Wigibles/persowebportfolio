@@ -4,6 +4,7 @@ import './Projects.css';
 import bulsufindImg from '../../assets/projects/bulsufind.png';
 import codingChroniclesImg from '../../assets/projects/coding-chronicles.png';
 import bulsuClassroomImg from '../../assets/projects/bulsu-classroom.png';
+import barbershopAppImg from '../../assets/projects/barber-appointment.png';
 
 const Projects = () => {
   const projectsRef = useRef(null);
@@ -14,6 +15,15 @@ const Projects = () => {
   const [hoveredProject, setHoveredProject] = useState(null);
   
   const projects = [
+    {
+      id: 'barbershop-appointment',
+      title: 'Barbershop Appointment System',
+      image: barbershopAppImg,
+      alt: 'Barbershop Appointment System Screenshot',
+      brief: 'An online appointment booking system for barbershops with scheduling, service selection, and customer management.',
+      categories: ['web'],
+      youtubeId: 'JleOAvKj8Ug'
+    },
     {
       id: 'bulsufind',
       title: 'BulSUFind',
@@ -62,7 +72,7 @@ const Projects = () => {
     } else if (projectsRef.current) {
       projectsRef.current.classList.remove('full-height-view');
     }
-  }, [location]);
+  }, [location, projects]);
   
   const handleFilterClick = (category) => {
     setActiveFilter(category);
@@ -119,7 +129,15 @@ const Projects = () => {
               onMouseLeave={handleMouseLeave}
             >
               {hasVideo ? (
-                <div className="project-video-container">
+                <div 
+                  className="project-video-container"
+                  onClick={(e) => {
+                    // Prevent the click from being captured by the video
+                    e.stopPropagation();
+                    // Navigate programmatically
+                    window.location.href = `/project/${project.id}`;
+                  }}
+                >
                   <iframe
                     src={`https://www.youtube.com/embed/${project.youtubeId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${project.youtubeId}`}
                     title={`${project.title} preview`}
@@ -127,6 +145,7 @@ const Projects = () => {
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                     className="project-video"
+                    style={{ pointerEvents: 'none' }}
                   ></iframe>
                 </div>
               ) : (
