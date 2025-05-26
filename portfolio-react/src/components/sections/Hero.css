@@ -45,7 +45,6 @@
 .hero-title {
     font-size: clamp(2.5rem, 8vw, 4rem);
     font-weight: 700;
-    line-height: 1.1;
     font-family: 'IBM Plex Mono', 'SF Mono', 'Fira Mono', 'Consolas', monospace;
     white-space: normal;
     overflow-wrap: break-word;
