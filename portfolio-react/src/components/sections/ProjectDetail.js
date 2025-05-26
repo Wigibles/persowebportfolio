@@ -24,10 +24,13 @@ const ProjectDetail = () => {
       role: 'Web & Mobile Developer',
       desc: 'A mobile app for managing lost and found items at Bulacan State University. Built with native Android, Java, Google API, REST, and Firebase, it streamlines item reporting, searching (including image-based search), real-time notifications, and user chat for efficient recovery and communication.',
       media: [
-        { type: 'image', src: bulsufindImg, alt: 'BulSUFind Screenshot' }
+        { type: 'image', src: bulsufindImg, alt: 'BulSUFind Screenshot' },
+        { type: 'video', src: 'https://youtu.be/LOOvYX3b7dA', alt: 'BulSUFind Demo Video' }
       ],
       tech: ['Java', 'JavaScript', 'Android', 'Google API / GCloud', 'REST', 'Firebase'],
-      links: []
+      links: [
+        { label: 'Watch Demo', url: 'https://youtu.be/LOOvYX3b7dA' }
+      ]
     },
     {
       id: 'coding-chronicles',

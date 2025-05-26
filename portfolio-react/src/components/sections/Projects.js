@@ -11,6 +11,7 @@ const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [animateCards, setAnimateCards] = useState(false);
+  const [hoveredProject, setHoveredProject] = useState(null);
   
   const projects = [
     {
@@ -19,7 +20,8 @@ const Projects = () => {
       image: bulsufindImg,
       alt: 'BulSUFind Screenshot',
       brief: 'A mobile app for managing lost and found items at Bulacan State University, built with Android, Java, and Firebase.',
-      categories: ['mobile', 'web']
+      categories: ['mobile', 'web'],
+      youtubeId: 'LOOvYX3b7dA'
     },
     {
       id: 'coding-chronicles',
@@ -27,7 +29,8 @@ const Projects = () => {
       image: codingChroniclesImg,
       alt: 'Coding Chronicles Screenshot',
       brief: 'A 2D platformer game developed for PC and Android, featuring dynamic gameplay and custom assets.',
-      categories: ['game', 'mobile']
+      categories: ['game', 'mobile'],
+      youtubeId: 'CZxOOZRPv8w'
     },
     {
       id: 'bulsu-classroom',
@@ -78,6 +81,14 @@ const Projects = () => {
     }, 300);
   };
 
+  const handleMouseEnter = (projectId) => {
+    setHoveredProject(projectId);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredProject(null);
+  };
+
   return (
     <section id="projects" className="projects" ref={projectsRef}>
       <h2>Projects</h2>
@@ -95,26 +106,52 @@ const Projects = () => {
       </div>
       
       <div className={`projects-grid ${animateCards ? 'animate' : ''}`}>
-        {filteredProjects.map((project, index) => (
-          <Link 
-            key={project.id} 
-            to={`/project/${project.id}`} 
-            className="project-card"
-            style={{ animationDelay: `${index * 0.1}s` }}
-          >
-            <img 
-              src={project.image} 
-              alt={project.alt} 
-              className="project-img" 
-            />
-            <div className="project-title">{project.title}</div>
-            <div className="project-card-overlay">
-              <h3 className="project-title">{project.title}</h3>
-              <p className="project-brief">{project.brief}</p>
-              <span className="view-project">View Project</span>
-            </div>
-          </Link>
-        ))}
+        {filteredProjects.map((project, index) => {
+          const hasVideo = project.youtubeId && hoveredProject === project.id;
+          
+          return (
+            <Link 
+              key={project.id} 
+              to={`/project/${project.id}`} 
+              className="project-card"
+              style={{ animationDelay: `${index * 0.1}s` }}
+              onMouseEnter={() => handleMouseEnter(project.id)}
+              onMouseLeave={handleMouseLeave}
+            >
+              {hasVideo ? (
+                <div className="project-video-container">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${project.youtubeId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${project.youtubeId}`}
+                    title={`${project.title} preview`}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="project-video"
+                  ></iframe>
+                </div>
+              ) : (
+                <img 
+                  src={project.image} 
+                  alt={project.alt} 
+                  className="project-img" 
+                />
+              )}
+              <div className="project-title">{project.title}</div>
+              <div className={`project-card-overlay ${hasVideo ? 'has-video' : ''}`}>
+                <h3 className="project-title">{project.title}</h3>
+                <p className="project-brief">{project.brief}</p>
+                <span className="view-project">View Project</span>
+                {project.youtubeId && (
+                  <div className="video-indicator">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#ffffff">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+                    </svg>
+                  </div>
+                )}
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </section>
   );
