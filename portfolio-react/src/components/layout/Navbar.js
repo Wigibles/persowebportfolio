@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
+
+// Move sections array outside component to prevent re-creation
+const sections = ['home', 'about', 'projects', 'skills', 'contact'];
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -12,9 +15,7 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 50;
-      if (isScrolled !== scrolled) {
         setScrolled(isScrolled);
-      }
       
       // Check if we're in the hero section
       const heroSection = document.getElementById('home');
@@ -25,7 +26,6 @@ const Navbar = () => {
       }
       
       // Determine active section for nav highlighting
-      const sections = ['home', 'about', 'projects', 'skills', 'contact'];
       const currentSection = sections.find(section => {
         const element = document.getElementById(section);
         if (element) {
@@ -46,19 +46,22 @@ const Navbar = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [scrolled]);
+  }, []); // Remove scrolled from dependency array
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-    document.body.style.overflow = mobileMenuOpen ? '' : 'hidden';
-  };
+  const toggleMobileMenu = useCallback(() => {
+    setMobileMenuOpen(prev => {
+      const newValue = !prev;
+      document.body.style.overflow = newValue ? 'hidden' : '';
+      return newValue;
+    });
+  }, []);
 
-  const closeMobileMenu = () => {
+  const closeMobileMenu = useCallback(() => {
     setMobileMenuOpen(false);
     document.body.style.overflow = '';
-  };
+  }, []);
 
-  const scrollToSection = (sectionId) => {
+  const scrollToSection = useCallback((sectionId) => {
     closeMobileMenu();
     setActiveSection(sectionId);
     
@@ -126,7 +129,7 @@ const Navbar = () => {
         });
       }
     }
-  };
+  }, [location.pathname, closeMobileMenu]);
 
   // Determine the navbar class based on scroll position and hero section visibility
   const navbarClass = inHeroSection && !scrolled ? 'navbar transparent' : `navbar ${scrolled ? 'scrolled' : ''}`;

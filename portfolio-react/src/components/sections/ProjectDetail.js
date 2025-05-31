@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import './ProjectDetail.css';
 import linkedinIcon from '../../assets/socials/3d-icon-linkedin.png';
@@ -10,6 +10,9 @@ import bulsuClassroomImg from '../../assets/projects/bulsu-classroom.png';
 import barbershopAppImg from '../../assets/projects/barber-appointment.png';
 
 const ProjectDetail = () => {
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [isVideoExpanded, setIsVideoExpanded] = useState(false);
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
@@ -97,63 +100,129 @@ const ProjectDetail = () => {
     return ytMatch ? ytMatch[1] : '';
   };
 
+  const handlePlayVideo = () => {
+    setIsVideoPlaying(true);
+    setIsVideoExpanded(true);
+  };
+
   // Track embedded YouTube video IDs
   const embeddedYouTubeIds = new Set();
 
+  // Find if project has video
+  const hasVideo = project.media.some(m => m.type === 'video');
+  const videoMedia = project.media.find(m => m.type === 'video');
+  const imageMedia = project.media.find(m => m.type === 'image');
+
   return (
     <main className="project-detail-main">
-      <div className={`project-card-detail ${project.media.length > 1 ? 'landscape' : 'single-col'}`}>
-        <div className="project-card-media">
-          {project.media.map((m, index) => {
-            if (m.type === 'image') {
-              return (
-                <img 
-                  key={index}
-                  src={m.src} 
-                  alt={m.alt || project.title} 
-                  className="project-detail-img" 
-                />
-              );
-            } else if (m.type === 'video' && isYouTubeUrl(m.src)) {
-              const videoId = extractYouTubeId(m.src);
-              if (videoId) {
-                embeddedYouTubeIds.add(videoId);
-                return (
-                  <iframe
-                    key={index}
-                    src={`https://www.youtube.com/embed/${videoId}`}
-                    className="project-detail-iframe"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    title={`${project.title} video`}
-                  ></iframe>
-                );
-              }
-              return null;
-            }
-            return null;
-          })}
+      <Link to="/#projects" className="project-back-btn">
+        ← Back to Projects
+      </Link>
+      
+      <div className="project-detail-container">
+        {/* Left Column - Main Content */}
+        <div className="project-main-content">
+          {/* Media Section - Now at the top */}
+          <div className={`project-media-section ${isVideoExpanded ? 'video-expanded' : ''}`}>
+            {hasVideo && videoMedia ? (
+              <div className="project-media-container">
+                <div className={`project-video-player ${isVideoPlaying ? 'playing' : ''}`}>
+                  {imageMedia && (
+                    <img 
+                      src={imageMedia.src} 
+                      alt={imageMedia.alt || project.title} 
+                      className="project-detail-img" 
+                    />
+                  )}
+                  
+                  {isYouTubeUrl(videoMedia.src) && (
+                    <iframe
+                      src={`https://www.youtube.com/embed/${extractYouTubeId(videoMedia.src)}?autoplay=${isVideoPlaying ? 1 : 0}&rel=0&modestbranding=1`}
+                      className="project-detail-iframe"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      title={`${project.title} video`}
+                    ></iframe>
+                  )}
+                  
+                  {!isVideoPlaying && (
+                    <div className="video-play-overlay" onClick={handlePlayVideo}>
+                      <div className="play-icon"></div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <div className="project-media-grid single-media">
+                {project.media.map((m, index) => {
+                  if (m.type === 'image') {
+                    return (
+                      <img 
+                        key={index}
+                        src={m.src} 
+                        alt={m.alt || project.title} 
+                        className="project-detail-img" 
+                      />
+                    );
+                  }
+                  return null;
+                })}
+              </div>
+            )}
+          </div>
+
+          {/* Hero Section - Now below media */}
+          <div className="project-hero">
+            <h1 className="project-detail-title">{project.title}</h1>
+            
+            <div className="project-meta-grid">
+              <div className="project-meta-item">
+                <div className="project-meta-label">Year</div>
+                <div className="project-meta-value">{project.year}</div>
+              </div>
+              <div className="project-meta-item">
+                <div className="project-meta-label">Role</div>
+                <div className="project-meta-value">{project.role}</div>
+              </div>
+            </div>
+            
+            <p className="project-detail-desc">{project.desc}</p>
+          </div>
         </div>
-        <div className="project-card-info">
-          <Link to="/#projects" className="btn project-back-btn">&larr; Back to Projects</Link>
-          <h1 className="project-detail-title">{project.title}</h1>
-          <div className="project-meta">
-            <b>Year:</b> {project.year}
+
+        {/* Right Sidebar */}
+        <div className="project-sidebar">
+          {/* Tech Stack Card */}
+          <div className="project-tech-card">
+            <h3 className="project-tech-title">Tech Stack</h3>
+            <div className="project-detail-tech">
+              {project.tech.map((tech, index) => (
+                <span key={index} className="project-detail-tech-item">{tech}</span>
+              ))}
+            </div>
           </div>
-          <div className="project-meta">
-            <b>Role:</b> {project.role}
-          </div>
-          <p className="project-detail-desc">{project.desc}</p>
-          <div className="project-detail-tech">
-            {project.tech.map((tech, index) => (
-              <span key={index} className="project-detail-tech-item">{tech}</span>
-            ))}
-          </div>
-          <div className="project-detail-links">
-            {project.links && project.links.map((link, index) => {
-              if (isYouTubeUrl(link.url)) {
-                const videoId = extractYouTubeId(link.url);
-                if (videoId && !embeddedYouTubeIds.has(videoId)) {
+
+          {/* Links Card */}
+          {project.links && project.links.length > 0 && (
+            <div className="project-links-card">
+              <h3 className="project-links-title">Project Links</h3>
+              <div className="project-detail-links">
+                {project.links.map((link, index) => {
+                  if (isYouTubeUrl(link.url)) {
+                    const videoId = extractYouTubeId(link.url);
+                    if (videoId && !embeddedYouTubeIds.has(videoId)) {
+                      return (
+                        <a 
+                          key={index} 
+                          href={link.url} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                        >
+                          {link.label}
+                        </a>
+                      );
+                    }
+                  }
                   return (
                     <a 
                       key={index} 
@@ -164,30 +233,25 @@ const ProjectDetail = () => {
                       {link.label}
                     </a>
                   );
-                }
-              }
-              return (
-                <a 
-                  key={index} 
-                  href={link.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
-                  {link.label}
-                </a>
-              );
-            })}
-          </div>
-          <div className="project-socials">
-            <a href="https://www.linkedin.com/in/luigiatlinkdin/" className="about-social-icon" title="LinkedIn" target="_blank" rel="noopener noreferrer">
-              <img src={linkedinIcon} alt="LinkedIn" className="social-img" />
-            </a>
-            <a href="https://github.com/Wigibles" className="about-social-icon" title="GitHub" target="_blank" rel="noopener noreferrer">
-              <img src={githubIcon} alt="GitHub" className="social-img" />
-            </a>
-            <a href="https://www.facebook.com/luigisantiago231" className="about-social-icon" title="Facebook" target="_blank" rel="noopener noreferrer">
-              <img src={facebookIcon} alt="Facebook" className="social-img" />
-            </a>
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Social Links Card */}
+          <div className="project-social-card">
+            <h3 className="project-social-title">Connect</h3>
+            <div className="project-socials">
+              <a href="https://www.linkedin.com/in/luigiatlinkdin/" className="about-social-icon" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <img src={linkedinIcon} alt="LinkedIn" className="social-img" />
+              </a>
+              <a href="https://github.com/Wigibles" className="about-social-icon" title="GitHub" target="_blank" rel="noopener noreferrer">
+                <img src={githubIcon} alt="GitHub" className="social-img" />
+              </a>
+              <a href="https://www.facebook.com/luigisantiago231" className="about-social-icon" title="Facebook" target="_blank" rel="noopener noreferrer">
+                <img src={facebookIcon} alt="Facebook" className="social-img" />
+              </a>
+            </div>
           </div>
         </div>
       </div>

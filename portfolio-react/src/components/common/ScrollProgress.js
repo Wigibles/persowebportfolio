@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './ScrollProgress.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+
+// Move sections array outside component to prevent re-creation
+const sections = ['home', 'about', 'projects', 'skills', 'contact'];
 
 const ScrollProgress = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [activeSection, setActiveSection] = useState('home');
   const [isExpanded, setIsExpanded] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
-  const sections = ['home', 'about', 'projects', 'skills', 'contact'];
   
   // Check if the screen is mobile on component mount
   useEffect(() => {
@@ -53,9 +55,9 @@ const ScrollProgress = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [sections]);
+  }, []); // Remove sections from dependency array
 
-  const scrollToSection = (sectionId) => {
+  const scrollToSection = useCallback((sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
       const navbar = document.querySelector('.navbar');
@@ -69,9 +71,9 @@ const ScrollProgress = () => {
         behavior: 'smooth'
       });
     }
-  };
+  }, []);
   
-  const toggleExpand = () => {
+  const toggleExpand = useCallback(() => {
     setIsAnimating(true);
     
     if (isExpanded) {
@@ -88,7 +90,7 @@ const ScrollProgress = () => {
         setIsAnimating(false);
       }, 500);
     }
-  };
+  }, [isExpanded]);
 
   return (
     <div className="scroll-progress-container">
