@@ -1151,4 +1151,22 @@
         padding: 0.6rem 1.2rem;
         font-size: 0.9rem;
     }
+}
+
+.view-credly-btn {
+    background: #ff9900;
+    color: #fff !important;
+    border: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    padding: 1.2rem 2.5rem;
+    margin-top: 1rem;
+    box-shadow: none;
+    display: inline-block;
+    transition: background 0.2s;
+}
+.view-credly-btn:hover {
+    background: #e67c00;
+    color: #fff !important;
 } 

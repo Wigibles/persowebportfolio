@@ -6,6 +6,8 @@ import githubIcon from '../../assets/socials/3d-icon-github.png';
 import facebookIcon from '../../assets/socials/3d-icon-facebook.png';
 
 // Certificate imports
+import digitalAwarenessImg from '../../assets/certificate/digital-awareness.png';
+import digitalAwarenessPdf from '../../assets/certificate/DigitalAwarenesLuigiSantiago.pdf';
 import javaUnitTestingImg from '../../assets/certificate/Java Unit Testing.jpg';
 import javaUnitTestingPdf from '../../assets/certificate/Java Unit Testing.pdf';
 import springBootImg from '../../assets/certificate/Spring Boot 3 Spring 6 & Hibernate.jpg';
@@ -32,6 +34,17 @@ import udemyLogo from '../../assets/socials/udemy-transparent-logo-free-png.webp
 
 // Certificate data - moved outside component to prevent re-creation on every render
 const certificates = [
+  {
+    id: 0,
+    title: "Digital Awareness",
+    image: digitalAwarenessImg,
+    pdf: digitalAwarenessPdf,
+    issuer: "Cisco",
+    certificateId: "5555d288-8929-4a17-bf78-e44ec8a5c44e",
+    credlyUrl: "https://www.credly.com/badges/5555d288-8929-4a17-bf78-e44ec8a5c44e",
+    description: "This certificate verifies the completion of Cisco's Digital Awareness course, demonstrating proficiency in digital literacy and cybersecurity fundamentals.",
+    skills: ["Digital Literacy", "Cybersecurity", "Online Safety", "Digital Ethics"]
+  },
   {
     id: 1,
     title: "Java Masterclass",
@@ -282,20 +295,36 @@ const About = () => {
                 >
                   <div className="certificate-content">
                     <div className="certificate-icon">
-                      <img src={udemyLogo} alt="Udemy Logo" className="udemy-logo" />
+                      {cert.credlyUrl ? (
+                        <img src={cert.image} alt="Credly Badge" className="udemy-logo" />
+                      ) : (
+                        <img src={udemyLogo} alt="Udemy Logo" className="udemy-logo" />
+                      )}
                     </div>
                     <h4 className="certificate-title">{cert.title}</h4>
                     <p className="certificate-issuer">{cert.issuer}</p>
                     <div className="certificate-link">
-                      <span 
-                        className="view-details"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          openUdemyCertificate(cert.certificateId);
-                        }}
-                      >
-                        View on Udemy
-                      </span>
+                      {cert.credlyUrl ? (
+                        <a
+                          href={cert.credlyUrl}
+                          className="view-details"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={e => e.stopPropagation()}
+                        >
+                          View on Credly
+                        </a>
+                      ) : (
+                        <span 
+                          className="view-details"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            openUdemyCertificate(cert.certificateId);
+                          }}
+                        >
+                          View on Udemy
+                        </span>
+                      )}
                       <span className="external-link-icon">↗</span>
                     </div>
                   </div>
@@ -531,12 +560,23 @@ const About = () => {
               >
                 Download Certificate PDF
               </button>
-              <button 
-                className="view-udemy-btn"
-                onClick={() => openUdemyCertificate(selectedCertificate.certificateId)}
-              >
-                View on Udemy
-              </button>
+              {selectedCertificate.credlyUrl ? (
+                <a
+                  className="view-udemy-btn view-credly-btn"
+                  href={selectedCertificate.credlyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View on Credly
+                </a>
+              ) : (
+                <button 
+                  className="view-udemy-btn"
+                  onClick={() => openUdemyCertificate(selectedCertificate.certificateId)}
+                >
+                  View on Udemy
+                </button>
+              )}
             </div>
           </div>
         </div>

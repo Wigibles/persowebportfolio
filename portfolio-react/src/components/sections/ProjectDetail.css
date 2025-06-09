@@ -462,8 +462,8 @@
     .project-detail-container {
         grid-template-columns: 1fr 350px;
         gap: 1.5rem;
-    }
-    
+}
+
     .project-detail-title {
         font-size: 2.2rem;
     }
@@ -473,19 +473,19 @@
     .project-detail-container {
         grid-template-columns: 1fr;
         gap: 2rem;
-    }
-    
+}
+
     .project-sidebar {
         order: 3;
     }
     
     .project-media-grid.dual-media {
         grid-template-columns: 1fr;
-    }
-    
+}
+
     .project-media-section.video-expanded {
         grid-column: 1;
-    }
+}
 }
 
 /* YouTube Mobile Style - Tablet */
@@ -494,12 +494,12 @@
         padding: 0;
         background: #fff;
         padding-top: 80px; /* Add space for fixed nav */
-    }
-    
+}
+
     .project-detail-main::before {
         display: none;
-    }
-    
+}
+
     .project-back-btn {
         margin: 1rem;
         margin-top: 0.5rem;
@@ -517,8 +517,8 @@
     .project-detail-container {
         gap: 0;
         max-width: none;
-    }
-    
+}
+
     /* YouTube-style edge-to-edge video */
     .project-media-section {
         background: #000;
@@ -528,8 +528,8 @@
         border: none;
         margin: 0;
         order: 1;
-    }
-    
+}
+
     .project-media-container {
         border-radius: 0;
         aspect-ratio: 16/9;
@@ -810,7 +810,7 @@
         border-bottom: 10px solid transparent;
         margin-left: 2px;
     }
-}
+} 
 
 /* Animation Keyframes */
 @keyframes fadeInUp {
